@@ -31,6 +31,10 @@ export async function signInAction(
   try {
     const existingUser = await db.user.findUnique({
       where: { email: data.email.toLowerCase() },
+      include: {
+        candidate: true,
+        employee: true
+      }
     })
     if (!existingUser) {
       return {
