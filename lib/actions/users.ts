@@ -130,7 +130,7 @@ let user;
   const session = await lucia.createSession(userId, {})
   const sessionCookie = lucia.createSessionCookie(session.id)
   setAuthCookie(sessionCookie)
-  return redirect("/")
+  return redirect("/account")
 }
 
 export async function signOutAction(): Promise<ActionResult> {
