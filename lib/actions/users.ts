@@ -56,7 +56,11 @@ export async function signInAction(
     const sessionCookie = lucia.createSessionCookie(session.id)
     setAuthCookie(sessionCookie);
 
-    return redirect('/dashboard')
+    if (existingUser.employee) return redirect("/dashboard")
+
+    if (existingUser.candidate) return redirect("/account")
+
+    return { error: "User is neither employee or candidate" }
   } catch (e) {
     return genericError
   }
