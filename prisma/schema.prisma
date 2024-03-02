@@ -1,18 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-}
-
-generator zod {
-  provider              = "zod-prisma"
-  output                = "./zod" 
-  relationModel         = true 
-  modelCase             = "camelCase" 
-  modelSuffix           = "Schema" 
-  useDecimalJs          = true 
-  prismaJsonNullability = true 
 }
 
 datasource db {
@@ -20,18 +7,92 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User {
-  id             String    @id
-  email          String    @unique
-  hashedPassword String
-  name           String?
-  sessions       Session[]
+model Application {
+  applicationId      String             @id
+  candidateId        String
+  potentialStartDate DateTime
+  applicationType    String
+  finalDecision      String?
+  university         String?
+  candidate          Candidate          @relation(fields: [candidateId], references: [candidateId])
+  interestedOffices  InterestedOffice[]
+  interviews         Interview[]
 }
 
-model Session {
-  id        String   @id
-  userId    String
-  expiresAt DateTime
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+model Candidate {
+  candidateId   String        @id
+  applicationId String?
+  userId        String?
+  applications  Application[]
+  user          User?         @relation(fields: [userId], references: [id])
+  interactions  Interaction[]
+  resumeUrl     String
+  phone         String
+  linkedIn      String
+}
+
+model Interaction {
+  interactionId  String     @id
+  eventId        String?
+  candidateId    String?
+  notes          String?
+  sentimentScore Float?
+  candidate      Candidate? @relation(fields: [candidateId], references: [candidateId])
+  event          Event?     @relation(fields: [eventId], references: [eventId])
+}
+
+model Event {
+  eventId      String        @id
+  hrLead       String?
+  date         DateTime?
+  location     String?
+  description  String?
+  title        String?
+  interactions Interaction[]
+}
+
+model Interview {
+  interviewId       String      @id
+  interviewerId     String?
+  applicationId     String
+  notes             String?
+  interviewDateTime DateTime
+  sentimentScore    Float?
+  interviewRound    String?
+  application       Application @relation(fields: [applicationId], references: [applicationId])
+}
+
+model InterestedOffice {
+  interestedOfficeId String      @id
+  officeId           String
+  applicationId      String
+  application        Application @relation(fields: [applicationId], references: [applicationId])
+  office             Office      @relation(fields: [officeId], references: [officeId])
+}
+
+model Office {
+  officeId          String             @id
+  city              String?
+  state             String?
+  interestedOffices InterestedOffice[]
+  employees         Employee[]
+}
+
+model User {
+  id             String      @id
+  email          String      @unique
+  hashedPassword String
+  firstName      String?
+  lastName       String?
+  candidate      Candidate[]
+  employee       Employee[]
+}
+
+model Employee {
+  employeeId   String  @id
+  homeOfficeId String?
+  userId       String?
+  position     String?
+  homeOffice   Office? @relation(fields: [homeOfficeId], references: [officeId])
+  user         User?   @relation(fields: [userId], references: [id])
 }
