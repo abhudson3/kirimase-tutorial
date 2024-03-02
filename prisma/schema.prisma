@@ -32,7 +32,7 @@ model Application {
 model Candidate {
   candidateId   String        @id
   applicationId String?
-  userId        String?
+  userId        String? @unique
   applications  Application[]
   user          User?         @relation(fields: [userId], references: [id])
   interactions  Interaction[]
@@ -94,8 +94,8 @@ model User {
   hashedPassword String
   firstName      String?
   lastName       String?
-  candidate      Candidate[]
-  employee       Employee[]
+  candidate      Candidate?
+  employee       Employee?
   sessions Session[]
 }
 
@@ -109,7 +109,7 @@ model Session {
 model Employee {
   employeeId   String  @id
   homeOfficeId String?
-  userId       String?
+  userId       String? @unique
   position     String?
   homeOffice   Office? @relation(fields: [homeOfficeId], references: [officeId])
   user         User?   @relation(fields: [userId], references: [id])
