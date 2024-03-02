@@ -10,8 +10,8 @@ export const userSchema = z.object({
 })
 
 export interface CompleteUser extends z.infer<typeof userSchema> {
-  candidate: CompleteCandidate[]
-  employee: CompleteEmployee[]
+  candidate?: CompleteCandidate | null
+  employee?: CompleteEmployee | null
   sessions: CompleteSession[]
 }
 
@@ -21,7 +21,7 @@ export interface CompleteUser extends z.infer<typeof userSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedUserSchema: z.ZodSchema<CompleteUser> = z.lazy(() => userSchema.extend({
-  candidate: relatedCandidateSchema.array(),
-  employee: relatedEmployeeSchema.array(),
+  candidate: relatedCandidateSchema.nullish(),
+  employee: relatedEmployeeSchema.nullish(),
   sessions: relatedSessionSchema.array(),
 }))
