@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteInterestedOffice, relatedInterestedOfficeSchema, CompleteEmployee, relatedEmployeeSchema } from "./index"
+import { CompleteEmployee, relatedEmployeeSchema, CompleteInterestedOffice, relatedInterestedOfficeSchema } from "./index"
 
 export const officeSchema = z.object({
   officeId: z.string(),
@@ -8,8 +8,8 @@ export const officeSchema = z.object({
 })
 
 export interface CompleteOffice extends z.infer<typeof officeSchema> {
-  interestedOffices: CompleteInterestedOffice[]
   employees: CompleteEmployee[]
+  interestedOffices: CompleteInterestedOffice[]
 }
 
 /**
@@ -18,6 +18,6 @@ export interface CompleteOffice extends z.infer<typeof officeSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedOfficeSchema: z.ZodSchema<CompleteOffice> = z.lazy(() => officeSchema.extend({
-  interestedOffices: relatedInterestedOfficeSchema.array(),
   employees: relatedEmployeeSchema.array(),
+  interestedOffices: relatedInterestedOfficeSchema.array(),
 }))

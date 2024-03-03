@@ -7,6 +7,8 @@ export const sessionSchema = z.object({
   candidateId: z.string().nullish(),
   employeeId: z.string().nullish(),
   expiresAt: z.date(),
+  candidateId: z.string().nullish(),
+  employeeId: z.string().nullish(),
 })
 
 export interface CompleteSession extends z.infer<typeof sessionSchema> {
