@@ -1,8 +1,18 @@
-export async function SetResume(userId: string, resumeUrl: string){
-    db?.candidate.update({
-        where: {userId: userId},
-        data: {
-            resumeUrl: resumeUrl
-        }
-    })
-}  
+"use server";
+import { db } from "@/lib/db/index";
+import { json } from "stream/consumers";
+// @ts-ignore
+export async function SetResume({ userId }, resumeUrl) {
+  "use server";
+
+  console.log(resumeUrl);
+  console.log(userId);
+  let response = await db.candidate.update({
+    where: { userId },
+    data: {
+      resumeUrl,
+    },
+  });
+  console.log(response);
+  //   console.log(response);
+}
