@@ -5,10 +5,22 @@
  */
 import Link from "next/link";
 import Image from "next/image";
-
+import { Resend } from 'resend';
 
 export default function LandingPage() {
-  
+  async function SignUpForEmail(formData: FormData) {
+    "use server";
+    const resend = new Resend('re_fTQ5ZWMM_6cDy1QCY6berTCvcEwBQVGH1');
+
+    const data: any = Object.fromEntries(formData);
+    console.log(data.email);
+    await resend.emails.send({
+      from: "andrew@andrewhudson.xyz",
+      to: data.email,
+      subject: "Hi there",
+      html: "<p>Thanks for signing up! we will be reaching out soon</p>",
+    });
+  }
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -136,7 +148,7 @@ export default function LandingPage() {
               </div>
               <div className="w-full max-w-sm space-y-2">
                 <form
-
+                  action={SignUpForEmail}
                   className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-2"
                 >
                   <input
