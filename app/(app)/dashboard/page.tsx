@@ -18,6 +18,7 @@ export default async function DashboardPage() {
         {/* Phone: {candidateSchema.phone} */}
         
       <LinkButton to="/event/create" label="Create Event"/>
+      <LinkButton to="/candidate" label="See Candidates" />
     </main>
   );
 }
