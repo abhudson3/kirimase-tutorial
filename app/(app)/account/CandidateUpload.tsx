@@ -13,6 +13,10 @@ export default function CandidateUpload({
   userId: string;
   currentResumeUrl: string;
 }) {
+  console.log(userId);
+  console.log(currentResumeUrl);
+  
+  
   // console.log("HEREJE");
 
   // console.log(currentResumeUrl);
@@ -25,6 +29,8 @@ export default function CandidateUpload({
         <form
           onSubmit={async (event) => {
             event.preventDefault();
+            console.log("HERE");
+            
 
             if (!inputFileRef.current?.files) {
               throw new Error("No file selected");
@@ -42,6 +48,10 @@ export default function CandidateUpload({
 
             const newBlob = (await response.json()) as PutBlobResult;
             console.log(newBlob.url);
+            console.log("LOOK");
+            
+            console.log(userId);
+            
             // @ts-ignore
             const serverRes = await SetResume(userId, newBlob.url);
             console.log(currentResumeUrl);
