@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Theme
 import LinkButton from "@/components/ui/LinkButton";
-import EditCandidate from "./EditCandidate";
+// import EditCandidate from "./EditCandidate";
 interface Props {
   gridData: any;
 }
