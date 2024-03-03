@@ -1,5 +1,6 @@
 "use server";
 import { db } from "@/lib/db/index";
+import { revalidatePath } from "next/cache";
 import { json } from "stream/consumers";
 // @ts-ignore
 export async function SetResume({ userId }, resumeUrl) {
@@ -14,5 +15,11 @@ export async function SetResume({ userId }, resumeUrl) {
     },
   });
   console.log(response);
+  revalidatePath("/")
   //   console.log(response);
+}
+export async function GetAllCandidates(){
+  "use server"
+  let response = await db.candidate.findMany({})
+  return response
 }

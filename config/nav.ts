@@ -1,5 +1,5 @@
 import { SidebarLink } from "@/components/SidebarItems";
-import { Cog, Globe, HomeIcon, CircleUser, QrCode } from "lucide-react";
+import { Cog, Globe, HomeIcon, CircleUser, QrCode, Table } from "lucide-react";
 
 type AdditionalLinks = {
   title: string;
@@ -11,6 +11,7 @@ export const defaultLinks: SidebarLink[] = [
   { href: "/account", title: "Account", icon: CircleUser },
   { href: "/settings", title: "Settings", icon: Cog },
   { href: "/qrcode", title: "Event Qr Code", icon: QrCode },
+  { href: "/candidate-view", title: "Candidate Table", icon: Table },
 ];
 
 export const additionalLinks: AdditionalLinks[] = [];
