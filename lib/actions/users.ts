@@ -138,12 +138,17 @@ export async function signUpAction(
 }
 
 export async function signOutAction(): Promise<ActionResult> {
+  console.log("TOP");
+  
   const { session } = await validateRequest()
   if (!session) {
     return {
       error: 'Unauthorized',
     }
   }
+  console.log("HEREIDJSOFHIO");
+  
+console.log(session);
 
   await lucia.invalidateSession(session.id)
 
