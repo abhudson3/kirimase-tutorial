@@ -1,6 +1,7 @@
 import UserSettings from "./UserSettings";
 import { checkAuth, getUserAuth } from "@/lib/auth/utils";
 import CandidateUpload from "./CandidateUpload";
+import { db } from "@/lib/db";
 export default async function Account() {
   await checkAuth();
   const { session } = await getUserAuth();
