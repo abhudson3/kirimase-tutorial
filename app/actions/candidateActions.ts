@@ -3,7 +3,7 @@ import { db } from "@/lib/db/index";
 import { revalidatePath } from "next/cache";
 import { json } from "stream/consumers";
 // @ts-ignore
-export async function SetResume({ userId }, resumeUrl) {
+export async function SetResume( userId, resumeUrl) {
   "use server";
 
   console.log(resumeUrl);
