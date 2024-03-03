@@ -1,7 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+.custom-upload-button {
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+}
+
+/* .smaller{
+  max-width: 1px;
+  max-height: 1px;
+} */
+
+/* Target all radio buttons */
+input[type="radio"] {
+  /* Adjust width and height */
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

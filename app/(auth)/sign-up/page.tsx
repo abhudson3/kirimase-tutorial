@@ -40,7 +40,7 @@ export default function SignUpPage() {
         <Input type="password" name="rePassword" id="rePassword" required />
         <br />
 
-          <Label className="mb-2.5">Are you a:</Label>
+          <Label className="mb-2.5">Role:</Label>
         <div role="group" className="flex align-center">
 
           <Label htmlFor="role" className="text-muted-foreground">
@@ -52,7 +52,8 @@ export default function SignUpPage() {
           <Label htmlFor="role" className="text-muted-foreground text-center">
           Employee  
           </Label>
-          <Input type="radio" name="role" value="employee" id="employee" required />
+          
+          <Input type="radio" className="smaller" name="role" value="employee" id="employee" required />
         </div>
 
         <br />

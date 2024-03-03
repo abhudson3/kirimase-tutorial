@@ -10,9 +10,13 @@ export default async function DashboardPage() {
   return (
     <main className="">
       <h1 className="text-2xl font-bold my-2">Profile</h1>
-      <pre className="bg-secondary p-4 rounded-lg my-2">
-        {JSON.stringify(session, null, 2)}
-      </pre>
+        
+        ID: {session?.user.id}
+        <br />
+        Email: {session?.user.email}
+        <br />
+        {/* Phone: {candidateSchema.phone} */}
+        
       <LinkButton to="/event/create" label="Create Event"/>
     </main>
   );
