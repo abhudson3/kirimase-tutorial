@@ -36,7 +36,7 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
   return (
     <Link href="/account">
       <div className="flex items-center justify-between w-full  pt-4  mb-2">
-      <SignOutBtn/>
+      
       
       </div>
       <div className="flex items-center justify-between w-full border-t border-border pt-4 px-2">
