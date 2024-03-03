@@ -5,6 +5,8 @@ export const sessionSchema = z.object({
   id: z.string(),
   userId: z.string(),
   expiresAt: z.date(),
+  candidateId: z.string().nullish(),
+  employeeId: z.string().nullish(),
 })
 
 export interface CompleteSession extends z.infer<typeof sessionSchema> {

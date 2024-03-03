@@ -5,9 +5,9 @@ export const candidateSchema = z.object({
   candidateId: z.string(),
   applicationId: z.string().nullish(),
   userId: z.string().nullish(),
-  resumeUrl: z.string(),
-  phone: z.string(),
-  linkedIn: z.string(),
+  resumeUrl: z.string().nullish(),
+  phone: z.string().nullish(),
+  linkedIn: z.string().nullish(),
 })
 
 export interface CompleteCandidate extends z.infer<typeof candidateSchema> {
