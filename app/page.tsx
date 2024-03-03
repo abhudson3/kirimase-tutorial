@@ -7,18 +7,18 @@ import Link from "next/link";
 import { Resend } from "resend";
 import Image from "next/image";
 export default function LandingPage() {
-  // async function SignUpForEmail(formData: FormData) {
-  //   "use server";
-
-  //   const data: any = Object.fromEntries(formData);
-  //   console.log(data.email);
-  //   await resend.emails.send({
-  //     from: "Acme <onboarding@resend.dev>",
-  //     to: data.email,
-  //     subject: "Hello World",
-  //     html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
-  //   });
-  // }
+  async function SignUpForEmail(formData: FormData) {
+    "use server";
+    const resend = new Resend("re_8VzF5TBa_7ivXM81w6qi8g7nWuHbNhnYw");
+    const data: any = Object.fromEntries(formData);
+    console.log(data.email);
+    await resend.emails.send({
+      from: "Andrew <andrew@andrewhudson.xyz>",
+      to: data.email,
+      subject: "Sign Up Confirmation",
+      html: "<p>Thanks for signing up! We will be in touch!</p>",
+    });
+  }
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -146,7 +146,7 @@ export default function LandingPage() {
               </div>
               <div className="w-full max-w-sm space-y-2">
                 <form
-
+                  action={SignUpForEmail}
                   className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-2"
                 >
                   <input
