@@ -120,7 +120,7 @@ export default function LandingPage() {
                   Sign Up for Updates
                 </h2>
                 <p className="max-w-[600px] text-neutral-500 md:text-xl dark:text-neutral-400">
-                  Stay updated with the latest job postinfs and updates.
+                  Stay updated with the latest job postings and updates.
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">

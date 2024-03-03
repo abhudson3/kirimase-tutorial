@@ -9,7 +9,8 @@ export const authenticationSchema = z.object({
 });
 
 export const updateUserSchema = z.object({
-  name: z.string().min(3).optional(),
+  firstName: z.string().min(3).optional(),
+  lastName: z.string().min(3).optional(),
   email: z.string().min(4).optional(),
 });
 
