@@ -53,8 +53,10 @@ export async function signInAction(
       }
     }
 
+    
     const session = await lucia.createSession(existingUser.id, {})
     const sessionCookie = lucia.createSessionCookie(session.id)
+
     setAuthCookie(sessionCookie);
 
     if (existingUser.employee) return redirect("/dashboard")
@@ -63,6 +65,8 @@ export async function signInAction(
 
     return { error: "User is neither employee or candidate" }
   } catch (e) {
+    console.log(e);
+    
     return genericError
   }
 }
@@ -72,23 +76,23 @@ export async function signUpAction(
   formData: FormData
 ): Promise<ActionResult> {
   const { error } = validateAuthFormData(formData)
-  const data : any = Object.fromEntries(formData)
+  const data: any = Object.fromEntries(formData)
 
   if (error !== null) return { error }
 
   console.log(data);
-  
-  // @ts-ignore
-  if(data.password !== data.rePassword) return {error: "Passwords must match"}
 
-  log(data) 
+  // @ts-ignore
+  if (data.password !== data.rePassword) return { error: "Passwords must match" }
+
+  log(data)
 
   const hashedPassword = await new Argon2id().hash(data.password)
   const userId = generateId(15)
 
   console.log("About to save");
-  
-let user;
+
+  let user;
   try {
     await db.user.create({
       data: {
@@ -99,19 +103,19 @@ let user;
     })
   } catch (e) {
     console.log(e);
-    
+
     return genericError
   }
   console.log(user)
-  try{
-    if(data.role === "candidate"){
+  try {
+    if (data.role === "candidate") {
       await db.candidate.create({
         data: {
           candidateId: generateId(15),
           userId
         }
       })
-    } else{
+    } else {
       await db.employee.create({
         data: {
           employeeId: generateId(15),
@@ -119,13 +123,13 @@ let user;
         }
       })
     }
-  } catch(e){
+  } catch (e) {
     console.log(e);
     return genericError
   }
 
   console.log("after saving");
-  
+
 
   const session = await lucia.createSession(userId, {})
   const sessionCookie = lucia.createSessionCookie(session.id)
