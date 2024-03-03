@@ -11,6 +11,7 @@ import  Link  from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import CandidateUpload from "../../account/CandidateUpload";
 
 export function UpdateCandidateForm({ candidate }: { candidate: Candidate & { user: User } }) {
     const router = useRouter()
@@ -93,6 +94,8 @@ export function UpdateCandidateForm({ candidate }: { candidate: Candidate & { us
 
 
             <SubmitButton />
+{/* @ts-ignore */}
+            <CandidateUpload userId={candidate.userId} currentResumeUrl={candidate.resumeUrl}/>
         </form>
 
     </>
@@ -102,7 +105,7 @@ const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
         <Button className="w-full" type="submit" disabled={pending}>
-            Sign{pending ? "ing" : ""} up
+           Update 
         </Button>
     );
 };

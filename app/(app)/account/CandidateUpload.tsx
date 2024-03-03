@@ -19,6 +19,8 @@ export default function CandidateUpload({
 
   // console.log(currentResumeUrl);
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const inputPictureRef = useRef<HTMLInputElement>(null);
+
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   return (
     <>
@@ -27,12 +29,17 @@ export default function CandidateUpload({
         <form
           onSubmit={async (event) => {
             event.preventDefault();
+             // @ts-ignore
+             let file; 
 
-            if (!inputFileRef.current?.files) {
-              throw new Error("No file selected");
+            if (inputFileRef.current?.files) {
+
+              file = inputFileRef.current.files[0];
+            } else if(inputPictureRef.current?.files){
+              file = inputPictureRef.current.files[0]
+            } else{
+              throw new Error("No file")
             }
-
-            const file = inputFileRef.current.files[0];
 
             const response = await fetch(
               `/api/avatar/upload?filename=${file.name}`,
@@ -44,6 +51,10 @@ export default function CandidateUpload({
 
             const newBlob = (await response.json()) as PutBlobResult;
             console.log(newBlob.url);
+            console.log(userId);
+            console.log("USEER ID ABOVE");
+            
+            
             // @ts-ignore
             const serverRes = await SetResume(userId, newBlob.url);
             console.log(currentResumeUrl);
@@ -66,7 +77,7 @@ export default function CandidateUpload({
             <Label htmlFor="email" className="text-muted-foreground">
               Upload Picture
             </Label>
-            <input name="file" accept="image/*" capture="user" ref={inputFileRef} type="file" />
+            <input name="picture" ref={inputPictureRef} type="file" accept="image/*" capture="user"/>
           </div>
           {
             currentResumeUrl && <a className="mx-auto decoration-cyan-400" href={currentResumeUrl}>
