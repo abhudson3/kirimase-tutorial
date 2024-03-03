@@ -19,11 +19,15 @@ export default async function Page() {
 
   let flattenedCandidates = candidates.map((item) => {
     return {
+      // @ts-ignore
       firstName: item.user.firstName,
+      // @ts-ignore
       lastName: item.user.lastName,
       phone: item.phone,
       linkedIn: item.linkedIn,
+      // @ts-ignore
       university: item.university,
+      // @ts-ignore
       email: item.user.email,
       resumeUrl: item.resumeUrl,
     };

@@ -5,19 +5,20 @@
  */
 import Link from "next/link";
 import Image from "next/image";
-
+import { Resend } from 'resend';
 
 export default function LandingPage() {
   async function SignUpForEmail(formData: FormData) {
     "use server";
+    const resend = new Resend('re_fTQ5ZWMM_6cDy1QCY6berTCvcEwBQVGH1');
 
     const data: any = Object.fromEntries(formData);
     console.log(data.email);
     await resend.emails.send({
-      from: "Andrew",
+      from: "andrew@andrewhudson.xyz",
       to: data.email,
-      subject: "Hello World",
-      html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
+      subject: "Hi there",
+      html: "<p>Thanks for signing up! we will be reaching out soon</p>",
     });
   }
   return (
