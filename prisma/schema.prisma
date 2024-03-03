@@ -35,12 +35,9 @@ model Candidate {
   userId        String?       @unique
   resumeUrl     String?
   phone         String?
-  linkedIn      String?
   applications  Application[]
   user          User?         @relation(fields: [userId], references: [id])
   interactions  Interaction[]
-  resumeUrl     String?
-  phone         String?
   linkedIn      String?
 }
 
