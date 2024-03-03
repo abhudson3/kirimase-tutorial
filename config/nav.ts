@@ -9,9 +9,10 @@ type AdditionalLinks = {
 export const defaultLinks: SidebarLink[] = [
   { href: "/dashboard", title: "Home", icon: HomeIcon },
   { href: "/account", title: "Account", icon: CircleUser },
-  { href: "/settings", title: "Settings", icon: Cog },
   { href: "/qrcode", title: "Event Qr Code", icon: QrCode },
   { href: "/candidate-view", title: "Candidate Table", icon: Table },
+  { href: "/settings", title: "Settings", icon: Cog },
+  
 ];
 
 export const additionalLinks: AdditionalLinks[] = [];
