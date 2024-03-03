@@ -67,3 +67,48 @@ export async function updateCandidateAction(
         return genericError
     }
 }
+
+
+export async function createCandidateAction(
+    _: ActionResult,
+    formData: FormData
+) {
+
+    const data: any = Object.fromEntries(formData)
+
+    try {
+        const userId = generateId(15)
+
+        const hashedPassword = await new Argon2id().hash(data.password)
+
+        await db.user.create({
+            data: {
+                email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                id: userId,
+                hashedPassword: hashedPassword,
+            }
+        })
+        // @ts-ignore
+        await db.candidate.create({
+            data: {
+                candidateId: generateId(15),
+                linkedIn: data.linkedIn,
+                phone: data.phone,
+                university: data.university,
+                userId,
+            }
+        })
+
+
+
+
+        return { message: "success" }
+
+    } catch (e) {
+        console.log(e);
+
+        return genericError
+    }
+}
