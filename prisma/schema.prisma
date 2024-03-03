@@ -4,12 +4,12 @@ generator client {
 
 generator zod {
   provider              = "zod-prisma"
-  output                = "./zod" 
-  relationModel         = true 
-  modelCase             = "camelCase" 
-  modelSuffix           = "Schema" 
-  useDecimalJs          = true 
-  prismaJsonNullability = true 
+  output                = "./zod"
+  prismaJsonNullability = "true"
+  useDecimalJs          = "true"
+  modelCase             = "camelCase"
+  modelSuffix           = "Schema"
+  relationModel         = "true"
 }
 
 datasource db {
@@ -32,13 +32,13 @@ model Application {
 model Candidate {
   candidateId   String        @id
   applicationId String?
-  userId        String? @unique
-  applications  Application[]
-  user          User?         @relation(fields: [userId], references: [id])
-  interactions  Interaction[]
+  userId        String?       @unique
   resumeUrl     String?
   phone         String?
   linkedIn      String?
+  applications  Application[]
+  user          User?         @relation(fields: [userId], references: [id])
+  interactions  Interaction[]
 }
 
 model Interaction {
@@ -84,28 +84,28 @@ model Office {
   officeId          String             @id
   city              String?
   state             String?
-  interestedOffices InterestedOffice[]
   employees         Employee[]
+  interestedOffices InterestedOffice[]
 }
 
 model User {
-  id             String      @id
-  email          String      @unique
+  id             String     @id
+  email          String     @unique
   hashedPassword String
   firstName      String?
   lastName       String?
   candidate      Candidate?
   employee       Employee?
-  sessions Session[]
+  sessions       Session[]
 }
 
 model Session {
-  id        String   @id
-  userId    String
+  id          String   @id
+  userId      String
+  expiresAt   DateTime
   candidateId String?
-  employeeId String?
-  expiresAt DateTime
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  employeeId  String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Employee {

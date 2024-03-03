@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "./button";
 
 type LinkProps = {
@@ -5,10 +6,10 @@ type LinkProps = {
     to: string
 }
 
-export default function Link({ label, to }: LinkProps) {
+export default function LinkButton({ label, to }: LinkProps) {
     return (
-        <a href={to}>
+        <Link href={to}>
             <Button>{label}</Button>
-        </a>
+        </Link>
     )
 }
