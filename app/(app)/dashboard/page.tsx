@@ -30,7 +30,14 @@ export default async function DashboardPage() {
 
     <br />
         
-      <LinkButton to="/event" label="Events"/>
+        ID: {session?.user.id}
+        <br />
+        Email: {session?.user.email}
+        <br />
+        {/* Phone: {candidateSchema.phone} */}
+        
+      <LinkButton to="/event/create" label="Create Event"/>
+      <LinkButton to="/candidate" label="See Candidates" />
     </main>
   );
 }
