@@ -5,6 +5,8 @@ import type { PutBlobResult } from "@vercel/blob";
 import { useState, useRef } from "react";
 import { Link, Upload } from "lucide-react";
 import { link } from "fs";
+import { Label } from "@radix-ui/react-label";
+import { Button } from "@/components/ui/button";
 
 export default function CandidateUpload({
   userId,
@@ -49,14 +51,35 @@ export default function CandidateUpload({
             setBlob(newBlob);
           }}
         >
-          <input name="file" ref={inputFileRef} type="file" required />
+          <div>
+            <Label htmlFor="email" className="text-muted-foreground">
+              Upload File
+            </Label>
+            <input name="file" ref={inputFileRef} type="file" />
 
-          <a className="mx-auto" href={currentResumeUrl}>
-            See your Resume
-          </a>
-          <button type="submit">
+
+
+          </div>
+
+          <div>
+
+            <Label htmlFor="email" className="text-muted-foreground">
+              Upload Picture
+            </Label>
+            <input name="file" accept="image/*" capture="user" ref={inputFileRef} type="file" />
+          </div>
+          {
+            currentResumeUrl && <a className="mx-auto decoration-cyan-400" href={currentResumeUrl}>
+              Download Resume
+            </a>
+
+          }
+          <br />
+          <br />
+          <Button type="submit">
+            Upload Resume
             <Upload />
-          </button>
+          </Button>
         </form>
         {blob && (
           <div>
@@ -67,3 +90,4 @@ export default function CandidateUpload({
     </>
   );
 }
+

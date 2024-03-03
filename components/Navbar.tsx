@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +16,7 @@ export default function Navbar() {
   return (
     <div className="md:hidden border-b mb-4 pb-2 w-full">
       <nav className="flex justify-between w-full items-center">
-        <div className="font-semibold text-lg">Logo</div>
+        <div className="font-semibold text-lg"><Logo>test</Logo></div>
         <Button variant="ghost" onClick={() => setOpen(!open)}>
           <AlignRight />
         </Button>
@@ -43,3 +44,15 @@ export default function Navbar() {
     </div>
   );
 }
+
+function Logo(props: any) {
+  return (
+    <Image
+      src="https://download.logo.wine/logo/CGI_Inc./CGI_Inc.-Logo.wine.png"
+      width={100}
+      height={100}
+      alt="Picture of the author"
+    />
+  );
+}
+

@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import SidebarItems from "./SidebarItems";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
@@ -13,7 +13,7 @@ const Sidebar = async () => {
     <aside className="h-screen min-w-52 bg-muted hidden md:block p-4 pt-8 border-r border-border shadow-inner">
       <div className="flex flex-col justify-between h-full">
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold ml-4">Logo</h3>
+          <h3 className="text-lg font-semibold ml-4"><Logo></Logo></h3>
           <SidebarItems />
         </div>
         <UserDetails session={session} />
@@ -53,3 +53,15 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
     </Link>
   );
 };
+
+function Logo(props: any) {
+  return (
+    <Image
+      src="https://download.logo.wine/logo/CGI_Inc./CGI_Inc.-Logo.wine.png"
+      width={100}
+      height={100}
+      alt="Picture of the author"
+    />
+  );
+}
+

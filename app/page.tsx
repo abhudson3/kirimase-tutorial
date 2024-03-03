@@ -4,19 +4,20 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
-import { Resend } from "resend";
 import Image from "next/image";
+
+
 export default function LandingPage() {
   async function SignUpForEmail(formData: FormData) {
     "use server";
-    const resend = new Resend("re_8VzF5TBa_7ivXM81w6qi8g7nWuHbNhnYw");
+
     const data: any = Object.fromEntries(formData);
     console.log(data.email);
     await resend.emails.send({
-      from: "Andrew <andrew@andrewhudson.xyz>",
+      from: "Andrew",
       to: data.email,
-      subject: "Sign Up Confirmation",
-      html: "<p>Thanks for signing up! We will be in touch!</p>",
+      subject: "Hello World",
+      html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
     });
   }
   return (
