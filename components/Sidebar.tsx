@@ -4,6 +4,7 @@ import SidebarItems from "./SidebarItems";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 import { AuthSession, getUserAuth } from "@/lib/auth/utils";
+import SignOutBtn from "./auth/SignOutBtn";
 
 const Sidebar = async () => {
   const session = await getUserAuth();
@@ -15,6 +16,7 @@ const Sidebar = async () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold ml-4"><Logo></Logo></h3>
           <SidebarItems />
+          <SignOutBtn />
         </div>
         <UserDetails session={session} />
       </div>
