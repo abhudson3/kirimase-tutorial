@@ -6,6 +6,8 @@
 import Link from "next/link";
 import { Resend } from "resend";
 import Image from "next/image";
+
+
 export default function LandingPage() {
   // async function SignUpForEmail(formData: FormData) {
   //   "use server";
