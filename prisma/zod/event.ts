@@ -1,9 +1,9 @@
 import * as z from "zod"
-import { CompleteInteraction, relatedInteractionSchema } from "./index"
+import { CompleteEmployee, relatedEmployeeSchema, CompleteInteraction, relatedInteractionSchema } from "./index"
 
 export const eventSchema = z.object({
   eventId: z.string(),
-  hrLead: z.string().nullish(),
+  hrLeadId: z.string().nullish(),
   date: z.date().nullish(),
   location: z.string().nullish(),
   description: z.string().nullish(),
@@ -11,6 +11,7 @@ export const eventSchema = z.object({
 })
 
 export interface CompleteEvent extends z.infer<typeof eventSchema> {
+  hrLead?: CompleteEmployee | null
   interactions: CompleteInteraction[]
 }
 
@@ -20,5 +21,6 @@ export interface CompleteEvent extends z.infer<typeof eventSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedEventSchema: z.ZodSchema<CompleteEvent> = z.lazy(() => eventSchema.extend({
+  hrLead: relatedEmployeeSchema.nullish(),
   interactions: relatedInteractionSchema.array(),
 }))

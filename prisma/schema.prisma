@@ -53,7 +53,8 @@ model Interaction {
 
 model Event {
   eventId      String        @id
-  hrLead       String?
+  hrLeadId     String?
+  hrLead       Employee?     @relation(fields: [eventId], references: [employeeId])
   date         DateTime?
   location     String?
   description  String?
@@ -115,4 +116,5 @@ model Employee {
   position     String?
   homeOffice   Office? @relation(fields: [homeOfficeId], references: [officeId])
   user         User?   @relation(fields: [userId], references: [id])
+  Event        Event[]
 }
