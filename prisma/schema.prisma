@@ -36,9 +36,9 @@ model Candidate {
   applications  Application[]
   user          User?         @relation(fields: [userId], references: [id])
   interactions  Interaction[]
-  resumeUrl     String
-  phone         String
-  linkedIn      String
+  resumeUrl     String?
+  phone         String?
+  linkedIn      String?
 }
 
 model Interaction {
@@ -102,6 +102,8 @@ model User {
 model Session {
   id        String   @id
   userId    String
+  candidateId String?
+  employeeId String?
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }

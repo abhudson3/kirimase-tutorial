@@ -4,6 +4,8 @@ import { CompleteUser, relatedUserSchema } from "./index"
 export const sessionSchema = z.object({
   id: z.string(),
   userId: z.string(),
+  candidateId: z.string().nullish(),
+  employeeId: z.string().nullish(),
   expiresAt: z.date(),
 })
 
