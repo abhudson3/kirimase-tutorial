@@ -22,7 +22,7 @@ export default async function EventCreateForm({ hrEmployees }: EventCreateFormPr
     })
 
     const runNavigation = () => {
-        router.push("/")
+        router.push("/event")
     }
 
     useEffect(() => {

@@ -37,7 +37,7 @@ export async function createEventAction(
                 eventId: generateId(15),
                 date: new Date(data.date),
                 description: data.description,
-                hrLead: data.hrLeadId,
+                hrLeadId: data.hrLeadId,
                 location: data.location,
                 title: data.title
             }
