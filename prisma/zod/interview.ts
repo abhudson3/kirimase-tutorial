@@ -1,10 +1,10 @@
 import * as z from "zod"
-import { CompleteApplication, relatedApplicationSchema } from "./index"
+import { CompleteCandidate, relatedCandidateSchema } from "./index"
 
 export const interviewSchema = z.object({
   interviewId: z.string(),
   interviewerId: z.string().nullish(),
-  applicationId: z.string(),
+  candidateId: z.string(),
   notes: z.string().nullish(),
   interviewDateTime: z.date(),
   sentimentScore: z.number().nullish(),
@@ -12,7 +12,7 @@ export const interviewSchema = z.object({
 })
 
 export interface CompleteInterview extends z.infer<typeof interviewSchema> {
-  application: CompleteApplication
+  candidate: CompleteCandidate
 }
 
 /**
@@ -21,5 +21,5 @@ export interface CompleteInterview extends z.infer<typeof interviewSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedInterviewSchema: z.ZodSchema<CompleteInterview> = z.lazy(() => interviewSchema.extend({
-  application: relatedApplicationSchema,
+  candidate: relatedCandidateSchema,
 }))
