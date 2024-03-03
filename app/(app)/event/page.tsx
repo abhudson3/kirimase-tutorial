@@ -2,6 +2,7 @@ import LinkButton from "@/components/ui/LinkButton"
 import LinkButton2 from "@/components/ui/LinkButton"
 import { Button } from "@/components/ui/button"
 import { getUserAuth } from "@/lib/auth/utils"
+import { db } from "@/lib/db"
 
 
 export default async function EventPage() {
