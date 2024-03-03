@@ -4,15 +4,17 @@ import { useMemo, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Theme
 import LinkButton from "@/components/ui/LinkButton";
+import EditCandidate from "./EditCandidate";
 interface Props {
   gridData: any;
 }
 
 export default function GridExample({ gridData }: Props) {
   const columnDefinitions = [
-    { field: "firstName", headerName: "First Name" },
+    { field: "firstName", headerName: "First Name",  },
     { field: "lastName", headerName: "Last Name" },
     { field: "phone", headerName: "Phone" },
+    { field: "id", headerName: "Edit Candidate" },
     { field: "linkedIn", headerName: "LinkedIn" },
     { field: "email", headerName: "Email" },
     { field: "resumeUrl", headerName: "Resume Url" },

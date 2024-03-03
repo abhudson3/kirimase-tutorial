@@ -11,7 +11,7 @@ export default async function CandidatePage() {
             }
         }
     )
-
+console.log(candidates)
     return <div>
         <LinkButton label="Create Candidate" to="/candidate/create"/>
         {candidates?.map(({ user, candidateId }, index) => <div key={index}>

@@ -11,11 +11,13 @@ import { revalidatePath } from "next/cache";
 export default async function Page() {
   let authStatus = await checkAuth();
   console.log(authStatus);
+  
   let candidates = await db.candidate.findMany({
     include: {
       user: true,
     },
   });
+    
 
   let flattenedCandidates = candidates.map((item) => {
     return {
@@ -30,9 +32,11 @@ export default async function Page() {
       // @ts-ignore
       email: item.user.email,
       resumeUrl: item.resumeUrl,
+      id: item.candidateId
+
     };
   });
-  //   console.log(flattenedCandidates);
+  console.log(candidates);
   revalidatePath("/")
   return (
     <div>
