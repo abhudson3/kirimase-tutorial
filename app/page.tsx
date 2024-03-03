@@ -4,9 +4,21 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
-
+import { Resend } from "resend";
 import Image from "next/image";
 export default function LandingPage() {
+  // async function SignUpForEmail(formData: FormData) {
+  //   "use server";
+
+  //   const data: any = Object.fromEntries(formData);
+  //   console.log(data.email);
+  //   await resend.emails.send({
+  //     from: "Acme <onboarding@resend.dev>",
+  //     to: data.email,
+  //     subject: "Hello World",
+  //     html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
+  //   });
+  // }
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -29,19 +41,22 @@ export default function LandingPage() {
           </Link>
         </nav>
       </header>
-      
+
       <main className="flex-1">
         <section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="bg-neutral-100 dark:bg-neutral-800 mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"><ApplicationImage className="h-6 w-6" /></div>
+              <div className="bg-neutral-100 dark:bg-neutral-800 mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square">
+                <ApplicationImage className="h-6 w-6" />
+              </div>
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                     CGI Application Tracker
                   </h1>
                   <p className="max-w-[600px] text-neutral-500 md:text-xl dark:text-neutral-400">
-                    The one stop shop for tracking applications, resumes, and ongoing interview processes.
+                    The one stop shop for tracking applications, resumes, and
+                    ongoing interview processes.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -73,13 +88,17 @@ export default function LandingPage() {
                   Track applications. Recruit smarter.
                 </h2>
                 <p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
-                Say goodbye to the stress of juggling multiple spreadsheets or forgetting important deadlines
-                TrackWise automates the entire process, allowing you to focus on what matters most: hiring awesome individuals.
+                  Say goodbye to the stress of juggling multiple spreadsheets or
+                  forgetting important deadlines TrackWise automates the entire
+                  process, allowing you to focus on what matters most: hiring
+                  awesome individuals.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-10">
-              <div className="mx-auto aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800 rounded-xl object-cover object-center sm:w-full lg:order-last"><CollabImage /></div>
+              <div className="mx-auto aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800 rounded-xl object-cover object-center sm:w-full lg:order-last">
+                <CollabImage />
+              </div>
               <div className="flex flex-col justify-center space-y-4">
                 <ul className="grid gap-6">
                   <li>
@@ -94,7 +113,8 @@ export default function LandingPage() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold">Scoring</h3>
                       <p className="text-neutral-500 dark:text-neutral-400">
-                        Make data-informed decisions through numerically valued feedback levels.
+                        Make data-informed decisions through numerically valued
+                        feedback levels.
                       </p>
                     </div>
                   </li>
@@ -102,7 +122,8 @@ export default function LandingPage() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold">Progress</h3>
                       <p className="text-neutral-500 dark:text-neutral-400">
-                        See the complete lifecyle of the recruiting process with sequential updates.
+                        See the complete lifecyle of the recruiting process with
+                        sequential updates.
                       </p>
                     </div>
                   </li>
@@ -124,8 +145,12 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">
-                <form className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-2">
+                <form
+
+                  className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-2"
+                >
                   <input
+                    name="email"
                     className="max-w-lg flex-1 px-4 py-2 border-border border rounded-md "
                     placeholder="Enter your email"
                     type="email"
@@ -195,4 +220,3 @@ function CollabImage(props: any) {
     </div>
   );
 }
-
