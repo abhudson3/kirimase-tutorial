@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import SidebarItems from "./SidebarItems";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import SignOutBtn from "./auth/SignOutBtn";
 
 import { AuthSession, getUserAuth } from "@/lib/auth/utils";
 import { Sign } from "crypto";
+import SignOutBtn from "./auth/SignOutBtn";
 
 const Sidebar = async () => {
   const session = await getUserAuth();
@@ -17,6 +17,7 @@ const Sidebar = async () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold ml-4"><Logo></Logo></h3>
           <SidebarItems />
+          <SignOutBtn />
         </div>
         <UserDetails session={session} />
       </div>
