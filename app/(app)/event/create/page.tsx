@@ -3,6 +3,7 @@
 import { log } from "console";
 import EventCreateForm from "./eventCreatePage";
 
+import { db } from "@/lib/db";
 
 
 export default async function EventCreatePage() {

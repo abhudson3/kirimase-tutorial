@@ -20,7 +20,7 @@ export default async function EventPage() {
     return <main className="">
         <h1 className="text-2xl font-bold my-2">Profile</h1>
 
-        {events?.map(({ date, description, eventId, hrLead, location, title }) => <div>
+        {events?.map(({ date, description, eventId, hrLead, location, title }, index) => <div key={index}>
             <p>{description} {date?.toDateString()} {eventId} {hrLead?.user?.firstName} {location} {title}</p> <LinkButton label="Details" to={`/event/${eventId}`}/> <Button >Delete</Button>
         </div>)}
 

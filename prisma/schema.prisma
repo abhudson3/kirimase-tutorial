@@ -54,7 +54,7 @@ model Interaction {
 model Event {
   eventId      String        @id
   hrLeadId     String?
-  hrLead       Employee?     @relation(fields: [eventId], references: [employeeId])
+  hrLead       Employee?     @relation(fields: [hrLeadId], references: [employeeId])
   date         DateTime?
   location     String?
   description  String?
