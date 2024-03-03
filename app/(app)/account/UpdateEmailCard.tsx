@@ -42,6 +42,6 @@ export default function UpdateEmailCard({ email }: { email: string }) {
 
 const Submit = () => {
   const { pending } = useFormStatus();
-  return <Button disabled={pending}>Update Email</Button>;
+  return <Button disabled={pending}>Save</Button>;
 };
 
