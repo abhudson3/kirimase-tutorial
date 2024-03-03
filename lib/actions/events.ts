@@ -51,3 +51,31 @@ export async function createEventAction(
         return genericError
     }
 }
+
+export async function createEventInteraction(
+    _: ActionResult,
+    formData: FormData
+)   {
+
+    const data: any = Object.fromEntries(formData)
+
+    try {
+
+        await db.interaction.create({
+            data: {
+                interactionId: generateId(15),
+                candidateId: data.candidateId,
+                 eventId: data.eventId,
+                 notes: data.notes,
+                 sentimentScore: parseInt(data.sentimentScore)
+            }
+        })
+
+    return {message: "success"} 
+
+    } catch (e) {
+        console.log(e);
+
+        return genericError
+    }
+}
