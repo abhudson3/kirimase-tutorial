@@ -4,21 +4,11 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
-import { Resend } from "resend";
 import Image from "next/image";
-export default function LandingPage() {
-  // async function SignUpForEmail(formData: FormData) {
-  //   "use server";
 
-  //   const data: any = Object.fromEntries(formData);
-  //   console.log(data.email);
-  //   await resend.emails.send({
-  //     from: "Acme <onboarding@resend.dev>",
-  //     to: data.email,
-  //     subject: "Hello World",
-  //     html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
-  //   });
-  // }
+
+export default function LandingPage() {
+  
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
