@@ -9,7 +9,15 @@ type LinkProps = {
 export default function LinkButton({ label, to }: LinkProps) {
     return (
         <Link href={to}>
-            <Button>{label}</Button>
+            <Button variant="secondary">{label}</Button>
+        </Link>
+    )
+
+}
+export function LinkButton2({ label, to }: LinkProps) {
+    return (
+        <Link href={to}>
+            <Button variant="destructive">{label}</Button>
         </Link>
     )
 }
