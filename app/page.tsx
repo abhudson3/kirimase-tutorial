@@ -5,6 +5,7 @@
  */
 import Link from "next/link";
 import Image from "next/image";
+// @ts-ignore
 import { Resend } from 'resend';
 
 export default function LandingPage() {
