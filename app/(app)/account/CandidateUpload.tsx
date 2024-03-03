@@ -3,9 +3,19 @@
 import { SetResume } from "@/app/actions/candidateActions";
 import type { PutBlobResult } from "@vercel/blob";
 import { useState, useRef } from "react";
-import { Upload } from 'lucide-react';
+import { Link, Upload } from "lucide-react";
+import { link } from "fs";
 
-export default function CandidateUpload() {
+export default function CandidateUpload({
+  userId,
+  currentResumeUrl,
+}: {
+  userId: string;
+  currentResumeUrl: string;
+}) {
+  // console.log("HEREJE");
+
+  // console.log(currentResumeUrl);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   return (
@@ -31,12 +41,22 @@ export default function CandidateUpload() {
             );
 
             const newBlob = (await response.json()) as PutBlobResult;
-            // const serverRes = await SetResume(u, newBlob.url)
+            console.log(newBlob.url);
+            // @ts-ignore
+            const serverRes = await SetResume(userId, newBlob.url);
+            console.log(currentResumeUrl);
+
             setBlob(newBlob);
           }}
         >
           <input name="file" ref={inputFileRef} type="file" required />
-          <button type="submit"><Upload /></button>
+
+          <a className="mx-auto" href={currentResumeUrl}>
+            See your Resume
+          </a>
+          <button type="submit">
+            <Upload />
+          </button>
         </form>
         {blob && (
           <div>
