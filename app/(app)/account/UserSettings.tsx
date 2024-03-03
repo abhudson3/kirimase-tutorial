@@ -8,9 +8,12 @@ export default function UserSettings({
 }: {
   session: AuthSession["session"];
 }) {
+  // console.log(session?.user.firstName)
+  // console.log('break')
+  // console.log(session)
   return (
     <>
-      <UpdateNameCard name={session?.user.name ?? ""} />
+      <UpdateNameCard firstName={session?.user.firstName ?? ""} lastName={session?.user.lastName ?? ""} />
       <UpdateEmailCard email={session?.user.email ?? ""} />
     </>
   );

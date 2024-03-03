@@ -5,11 +5,11 @@ generator client {
 generator zod {
   provider              = "zod-prisma"
   output                = "./zod"
-  prismaJsonNullability = "true"
   useDecimalJs          = "true"
-  modelCase             = "camelCase"
+  prismaJsonNullability = "true"
   modelSuffix           = "Schema"
   relationModel         = "true"
+  modelCase             = "camelCase"
 }
 
 datasource db {
@@ -17,28 +17,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Application {
-  applicationId      String             @id
-  candidateId        String
-  potentialStartDate DateTime
-  applicationType    String
-  finalDecision      String?
-  university         String?
-  candidate          Candidate          @relation(fields: [candidateId], references: [candidateId])
-  interestedOffices  InterestedOffice[]
-  interviews         Interview[]
-}
-
 model Candidate {
-  candidateId   String        @id
-  applicationId String?
-  userId        String?       @unique
-  resumeUrl     String?
-  phone         String?
-  linkedIn      String?
-  applications  Application[]
-  user          User?         @relation(fields: [userId], references: [id])
-  interactions  Interaction[]
+  candidateId      String             @id
+  userId           String?            @unique
+  resumeUrl        String?
+  phone            String?
+  linkedIn         String?
+  university       String?
+  user             User?              @relation(fields: [userId], references: [id])
+  interactions     Interaction[]
+  InterestedOffice InterestedOffice[]
+  Interview        Interview[]
 }
 
 model Interaction {
@@ -63,22 +52,22 @@ model Event {
 }
 
 model Interview {
-  interviewId       String      @id
+  interviewId       String    @id
   interviewerId     String?
-  applicationId     String
+  candidateId       String
   notes             String?
   interviewDateTime DateTime
   sentimentScore    Float?
   interviewRound    String?
-  application       Application @relation(fields: [applicationId], references: [applicationId])
+  candidate         Candidate @relation(fields: [candidateId], references: [candidateId])
 }
 
 model InterestedOffice {
-  interestedOfficeId String      @id
-  officeId           String
-  applicationId      String
-  application        Application @relation(fields: [applicationId], references: [applicationId])
-  office             Office      @relation(fields: [officeId], references: [officeId])
+  interestedOfficeId       String    @id
+  officeId                 String
+  candidateId              String
+  candidate                Candidate @relation(fields: [candidateId], references: [candidateId])
+  office                   Office    @relation(fields: [officeId], references: [officeId])
 }
 
 model Office {

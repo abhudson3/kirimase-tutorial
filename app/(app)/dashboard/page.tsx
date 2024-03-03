@@ -1,19 +1,37 @@
 import SignOutBtn from "@/components/auth/SignOutBtn";
 import LinkButton from "@/components/ui/LinkButton";
 import { getUserAuth } from "@/lib/auth/utils";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 
 export default async function DashboardPage() {
   const { session } = await getUserAuth();
-  const employee = db?.employee.findFirst({
-    where: { userId: session?.user.id }
-  })
+  console.log(session)
   return (
     <main className="">
-      <h1 className="text-2xl font-bold my-2">Profile</h1>
-      <pre className="bg-secondary p-4 rounded-lg my-2">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <LinkButton to="/event/create" label="Create Event"/>
+
+    <Card className={("w-[380px]")}>
+      <CardHeader>
+        <CardTitle>{session?.user.firstName} {session?.user.lastName}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p>Email: {session?.user.email}</p>
+      </CardContent>
+    </Card>
+
+
+
+    <br />
+        
+      <LinkButton to="/event" label="Events"/>
+      <LinkButton to="/candidate" label="See Candidates" />
     </main>
   );
 }

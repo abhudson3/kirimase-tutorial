@@ -1,19 +1,20 @@
 import * as z from "zod"
-import { CompleteApplication, relatedApplicationSchema, CompleteUser, relatedUserSchema, CompleteInteraction, relatedInteractionSchema } from "./index"
+import { CompleteUser, relatedUserSchema, CompleteInteraction, relatedInteractionSchema, CompleteInterestedOffice, relatedInterestedOfficeSchema, CompleteInterview, relatedInterviewSchema } from "./index"
 
 export const candidateSchema = z.object({
   candidateId: z.string(),
-  applicationId: z.string().nullish(),
   userId: z.string().nullish(),
   resumeUrl: z.string().nullish(),
   phone: z.string().nullish(),
   linkedIn: z.string().nullish(),
+  university: z.string().nullish(),
 })
 
 export interface CompleteCandidate extends z.infer<typeof candidateSchema> {
-  applications: CompleteApplication[]
   user?: CompleteUser | null
   interactions: CompleteInteraction[]
+  InterestedOffice: CompleteInterestedOffice[]
+  Interview: CompleteInterview[]
 }
 
 /**
@@ -22,7 +23,8 @@ export interface CompleteCandidate extends z.infer<typeof candidateSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedCandidateSchema: z.ZodSchema<CompleteCandidate> = z.lazy(() => candidateSchema.extend({
-  applications: relatedApplicationSchema.array(),
   user: relatedUserSchema.nullish(),
   interactions: relatedInteractionSchema.array(),
+  InterestedOffice: relatedInterestedOfficeSchema.array(),
+  Interview: relatedInterviewSchema.array(),
 }))

@@ -158,28 +158,36 @@ export async function updateUser(
 ): Promise<ActionResult & { success?: boolean }> {
   const { session } = await getUserAuth();
   if (!session) return { error: "Unauthorised" };
-
-  const name = formData.get("name") ?? undefined;
+  const firstName = formData.get("firstName") ?? undefined;
+  const lastName = formData.get("lastName") ?? undefined;
   const email = formData.get("email") ?? undefined;
 
-  const result = updateUserSchema.safeParse({ name, email });
+  const result = updateUserSchema.safeParse({ firstName, lastName, email });
 
   if (!result.success) {
     const error = result.error.flatten().fieldErrors;
-    if (error.name) return { error: "Invalid name - " + error.name[0] };
+    if (error.firstName) return { error: "Invalid first name - " + error.firstName[0] };
+    if (error.lastName) return { error: "Invalid last name - " + error.lastName[0] };
     if (error.email) return { error: "Invalid email - " + error.email[0] };
     return genericError;
   }
+  console.log("firstName: ",firstName, "lastName: ", lastName )
 
   try {
-    await db.user.update({
-      data: { ...result.data },
+    let data = await db.user.update({
+      data: { 
+        firstName: result.data.firstName,
+        lastName: result.data.lastName,
+        email: result.data.email
+      },
       where: { id: session.user.id },
     });
+    console.log("postupdate", data)
     revalidatePath("/account");
     return { success: true, error: "" };
   } catch (e) {
     return genericError;
   }
 }
+
 

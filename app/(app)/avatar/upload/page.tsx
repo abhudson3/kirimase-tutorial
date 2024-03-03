@@ -2,7 +2,7 @@
 
 import type { PutBlobResult } from '@vercel/blob';
 import { useState, useRef } from 'react';
-
+import { SetResume } from '@/app/actions/candidateActions';
 export default function AvatarUploadPage() {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
@@ -31,6 +31,7 @@ export default function AvatarUploadPage() {
           const newBlob = (await response.json()) as PutBlobResult;
 
           setBlob(newBlob);
+          // const resumeSet = await SetResume()
         }}
       >
         <input name="file" ref={inputFileRef} type="file" required />
