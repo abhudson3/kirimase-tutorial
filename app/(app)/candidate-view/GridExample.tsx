@@ -33,7 +33,7 @@ export default function GridExample({ gridData }: Props) {
   return (
     <div className={"mx-auto sm:w-full md:w-full"}>
       <div className="ag-theme-alpine mx-auto my-4" style={{ height: 500 }}>
-        View Candidates
+        
         <AgGridReact
           rowData={rowData}
           pagination={true}

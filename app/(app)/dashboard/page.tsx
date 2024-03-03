@@ -30,7 +30,7 @@ export default async function DashboardPage() {
 
     <br />
         
-      <LinkButton to="/event" label="Events"/> <LinkButton to="/candidate" label="See Candidates" />
+      <LinkButton to="/event" label="Events"/> <LinkButton to="/candidate-view" label="See Candidates" />
     </main>
   );
 }
