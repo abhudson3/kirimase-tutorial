@@ -16,6 +16,7 @@ import {
 } from '../auth/utils'
 
 import { updateUserSchema } from "../db/schema/auth";
+import { log } from "console";
 
 interface ActionResult {
   error: string
@@ -31,6 +32,10 @@ export async function signInAction(
   try {
     const existingUser = await db.user.findUnique({
       where: { email: data.email.toLowerCase() },
+      include: {
+        candidate: true,
+        employee: true
+      }
     })
     if (!existingUser) {
       return {
@@ -48,12 +53,20 @@ export async function signInAction(
       }
     }
 
+    
     const session = await lucia.createSession(existingUser.id, {})
     const sessionCookie = lucia.createSessionCookie(session.id)
+
     setAuthCookie(sessionCookie);
 
-    return redirect('/dashboard')
+    if (existingUser.employee) return redirect("/dashboard")
+
+    if (existingUser.candidate) return redirect("/account")
+
+    return { error: "User is neither employee or candidate" }
   } catch (e) {
+    console.log(e);
+    
     return genericError
   }
 }
@@ -62,13 +75,24 @@ export async function signUpAction(
   _: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
-  const { data, error } = validateAuthFormData(formData)
+  const { error } = validateAuthFormData(formData)
+  const data: any = Object.fromEntries(formData)
 
   if (error !== null) return { error }
+
+  console.log(data);
+
+  // @ts-ignore
+  if (data.password !== data.rePassword) return { error: "Passwords must match" }
+
+  log(data)
 
   const hashedPassword = await new Argon2id().hash(data.password)
   const userId = generateId(15)
 
+  console.log("About to save");
+
+  let user;
   try {
     await db.user.create({
       data: {
@@ -78,13 +102,39 @@ export async function signUpAction(
       },
     })
   } catch (e) {
+    console.log(e);
+
     return genericError
   }
+  console.log(user)
+  try {
+    if (data.role === "candidate") {
+      await db.candidate.create({
+        data: {
+          candidateId: generateId(15),
+          userId
+        }
+      })
+    } else {
+      await db.employee.create({
+        data: {
+          employeeId: generateId(15),
+          userId
+        }
+      })
+    }
+  } catch (e) {
+    console.log(e);
+    return genericError
+  }
+
+  console.log("after saving");
+
 
   const session = await lucia.createSession(userId, {})
   const sessionCookie = lucia.createSessionCookie(session.id)
   setAuthCookie(sessionCookie)
-  return redirect('/dashboard')
+  return redirect("/account")
 }
 
 export async function signOutAction(): Promise<ActionResult> {

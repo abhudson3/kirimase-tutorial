@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import AuthFormError from "@/components/auth/AuthFormError";
 
 
-export default function SignUpPage() {
+export default function CandidateSignUpPage() {
   const [state, formAction] = useFormState(signUpAction, {
     error: "",
   });
@@ -27,39 +27,13 @@ export default function SignUpPage() {
         </Label>
         <Input name="email" type="email" id="email" required />
         <br />
-
         <Label htmlFor="password" className="text-muted-foreground">
           Password
         </Label>
         <Input type="password" name="password" id="password" required />
         <br />
-
-        <Label htmlFor="rePassword" className="text-muted-foreground">
-          Re-Password
-        </Label>
-        <Input type="password" name="rePassword" id="rePassword" required />
-        <br />
-
-          <Label className="mb-2.5">Are you a:</Label>
-        <div role="group" className="flex align-center">
-
-          <Label htmlFor="role" className="text-muted-foreground">
-            Candidate
-          </Label>
-          <Input type="radio" name="role" value="candidate" id="candidate" required />
-
-          
-          <Label htmlFor="role" className="text-muted-foreground text-center">
-          Employee  
-          </Label>
-          <Input type="radio" name="role" value="employee" id="employee" required />
-        </div>
-
-        <br />
-
-       
-
-        {/* <Label htmlFor="firstName" className="text-muted-foreground">
+        
+        <Label htmlFor="firstName" className="text-muted-foreground">
          First Name 
         </Label>
         <Input name="firstName" type="text" id="firstName" required />
@@ -75,7 +49,7 @@ export default function SignUpPage() {
          School/University (if applicable)
         </Label>
         <Input name="university" type="text" id="university" />
-        <br /> */}
+        <br />
 
         <SubmitButton />
       </form>
