@@ -5,7 +5,6 @@ export const interestedOfficeSchema = z.object({
   interestedOfficeId: z.string(),
   officeId: z.string(),
   candidateId: z.string(),
-  applicationApplicationId: z.string().nullish(),
 })
 
 export interface CompleteInterestedOffice extends z.infer<typeof interestedOfficeSchema> {

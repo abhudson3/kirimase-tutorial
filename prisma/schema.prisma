@@ -68,7 +68,6 @@ model InterestedOffice {
   candidateId              String
   candidate                Candidate @relation(fields: [candidateId], references: [candidateId])
   office                   Office    @relation(fields: [officeId], references: [officeId])
-  applicationApplicationId String?
 }
 
 model Office {
