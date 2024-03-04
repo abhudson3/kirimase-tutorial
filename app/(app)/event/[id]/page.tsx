@@ -8,7 +8,7 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import CreateEventInteractionForm from "./CreateEventInteractionForm";
-  
+import { db } from "@/lib/db"; 
   
 
 export default async function EventDetailPage({params: {id}}: {params: {id: string}}){
